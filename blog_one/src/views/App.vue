@@ -1,20 +1,28 @@
-<style>
-	
+<style scoped>
+	p{
+		color:white;
+		width:100%;height:100%;
+		text-align:center;
+		font-size:25px;font-weight:bolder;
+	}
+	p a{
+		color:red;font-weight:red;
+	}
 </style>
 <template>
 	<div>
-		<Header-component></Header-component>
+		<p>
+			Welcome to the book store
+		</p>
 		<router-view></router-view>
 	</div>
 </template>
 <script>
-	import Header from '../components/Header'
 	export default{
 		data(){
-
-		},
-		components:{
-			HeaderComponent:Header
+			return {
+				status:true
+			}
 		}
 	}
 </script>
