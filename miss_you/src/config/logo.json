@@ -1,0 +1,25 @@
+{
+	"left":{
+		"branch":{
+			"branch_name":"Miss You",
+			"branch_link":""
+		},
+		"links":[
+			{"name":"Write","href":""},
+			{"name":"Read","href":""}
+		]
+	},
+	"right":{
+		"links":[
+			{"name":"More","href":""}
+		],
+		"dropdown":{
+			"name":"Setttings",
+			"list":[
+				{"name":"Setting","href":""},
+				{"name":"Login","href":""},		
+				{"name":"Out","href":""}		
+			]
+		}
+	}
+}
