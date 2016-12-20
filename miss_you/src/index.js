@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import resource from 'vue-resource'
 import App from './pages/App'
-import $ from 'jquery'
 
 Vue.use(Router)
 Vue.use(resource)
