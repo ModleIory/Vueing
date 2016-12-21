@@ -21,7 +21,7 @@
 
 				<ul class="nav navbar-nav">
 					<template v-for="x in nav.left.links">
-						<li class="active"><a href="x.href">{{x.name}}</a></li>
+						<li class=""><a href="x.href">{{x.name}}</a></li>
 					</template>
 				</ul>
 
