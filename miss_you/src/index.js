@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import resource from 'vue-resource'
 import App from './pages/App'
 import Home from './pages/Home'
+import Detail from './pages/Detail'
 
 Vue.use(Router)
 Vue.use(resource)
@@ -18,6 +19,10 @@ router.map({
 	'/':{
 		name:'home',
 		component:Home
+	},
+	'/detail':{
+		name:'detail',
+		component:Detail
 	}
 })
 

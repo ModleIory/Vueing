@@ -64,10 +64,10 @@ module.exports = {
 			jQuery: "jquery",
 			"window.jQuery": "jquery"
 		})
-	]
+	],
 	//这里在socket.io时候有效果,变个$j就不行沃日,或许io和window的一样,用的是window的,这里用$也可以呀,可以个屁,简直不能用,只能entry component用,搞不成!
-	// externals:{
-	// 	// 失败导出$j
-	// 	$:'window.$'
-	// }
+	externals:{
+		// 失败导出$j,index.html引入这个,里面根本不需要加这个子组件也能访问,只是网络慢,直接刷新子组件的话有时候可能出不来
+		// SimpleMDE:'window.SimpleMDE'
+	}
 }

@@ -6,7 +6,7 @@
 		cursor:pointer;
 	}
 	.modle_container{
-		min-height:600px;
+		min-height:730px;
 	}
 </style>
 <template>
