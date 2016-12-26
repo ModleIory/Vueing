@@ -35,7 +35,7 @@
 					methods:'get',
 					timeout:30
 				}).then((res)=>{
-					console.log(res.data)
+					//console.log(res.data)
 					this.list = res.data
 				})
 			}

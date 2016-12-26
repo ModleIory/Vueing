@@ -53,7 +53,7 @@
 					},
 					timeout:20
 				}).then((res)=>{
-					console.info(res.data)
+					//console.info(res.data)
 					this.foot = res.data
 				})
 			}

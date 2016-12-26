@@ -15,6 +15,7 @@ const router = new Router({
 const test = {
 	template:"<h1>this is test</h1>"
 }
+//用这种方法,router文档里面的各种不管用?!===>管用的,是我傻逼
 router.map({
 	'/':{
 		name:'home',
@@ -29,6 +30,13 @@ router.map({
 router.redirect({
 	'*':'/'
 })
+
+/*钩子,可以写在各个组件内部,作为属性*/
+// router.beforeEach((to, from, next) => {
+// 	console.warn(from)
+// 	console.warn(to)
+// 	to.next()
+// })
 
 router.start(App,'#app')
 

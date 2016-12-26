@@ -38,7 +38,7 @@
 		props:['listData'],
 		methods:{
 			change_color(flag,e){
-				console.info(e.target)
+				//console.info(e.target)
 				this.panel_success = flag?true:false
 			}
 		}
