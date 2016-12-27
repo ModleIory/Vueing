@@ -6,7 +6,8 @@
 			"time":"2016-12-25",
 			"statement":"Feel this world is not mine",
 			"content":"Black sky cover,Shine start tear,Insect fly,Insect fly,Who are you miss?",
-			"author":"modle_sherlock"
+			"author":"modle_sherlock",
+			"status":"special"
 		},
 		{
 			"id":2,
@@ -14,7 +15,8 @@
 			"time":"2016-12-25",
 			"statement":"Feel this world is fill with all ......",
 			"content":"Black sky cover,Shine start tear,Insect fly,Insect fly,Who are you miss?",
-			"author":"modle_sherlock"
+			"author":"modle_sherlock",
+			"status":"normal"
 		}
 	]
 }

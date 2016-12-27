@@ -2,10 +2,10 @@
 	"left":{
 		"branch":{
 			"branch_name":"Miss You",
-			"branch_link":""
+			"branch_link":"/"
 		},
 		"links":[
-			{"name":"Write","href":""},
+			{"name":"Write","href":"/write"},
 			{"name":"Read","href":""}
 		]
 	},

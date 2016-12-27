@@ -5,25 +5,37 @@
 	.panel_modle:hover{
 		cursor:pointer;
 	}
+	[class="panel-heading"]{
+		transition: font-size 0.4s ease;
+	}
+	.panel_modle:hover [class="panel-heading"]{
+		font-size:18px;
+	}
 	.modle_container{
 		min-height:730px;
+	}
+	.modle_label{
+		float: right;
 	}
 </style>
 <template>
 	<div class="container modle_container">
 		<div 
 			class="panel panel-default panel_modle" 
-			:class="{'panel-success':panel_success}" 
-			v-on:mouseenter="change_color(true,$event)"
-			@mouseleave="change_color(false,$event)" 
-			v-for="x in listData.list"
+			v-for="x in listData.list" 
+			@click="toDetail(x.id)"
 		>
 			<div class="panel-heading" :data-id="x.id">
 				<strong>{{x.title}}<strong>
 				<strong style='float:right'>{{x.time}}</strong>
 			</div>
 			<div class="panel-body">
-				<p>{{x.statement}}</ p>
+				{{x.statement}}
+				<span 
+					class="label modle_label" 
+					:class="{'label-success':x.status=='special'?true:false,'label-warning':x.status=='special'?false:true}" >
+					{{x.status}}
+				</span>
 			</div>
 		</div>
 	</div>
@@ -32,14 +44,18 @@
 	export default{
 		data(){
 			return {
-				panel_success:false
+
 			}
 		},
 		props:['listData'],
 		methods:{
-			change_color(flag,e){
-				//console.info(e.target)
-				this.panel_success = flag?true:false
+			toDetail(id){
+				this.$route.router.go({
+					name:'detail',
+					params:{
+						id:id
+					}
+				})
 			}
 		}
 	}

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import resource from 'vue-resource'
 import App from './pages/App'
 import Home from './pages/Home'
+import Write from './pages/Write'
 import Detail from './pages/Detail'
 
 Vue.use(Router)
@@ -21,7 +22,15 @@ router.map({
 		name:'home',
 		component:Home
 	},
-	'/detail':{
+	'/update':{
+		name:'update',
+		component:Write
+	},
+	'/write':{
+		name:'write',
+		component:Write
+	},
+	'/detail/:id':{
 		name:'detail',
 		component:Detail
 	}

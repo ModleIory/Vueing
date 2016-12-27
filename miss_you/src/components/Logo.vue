@@ -12,7 +12,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="nav.left.branch.branch_link?nav.left.branch.branch_link:''">
+				<a class="navbar-brand" v-link="{path:nav.left.branch.branch_link?nav.left.branch.branch_link:''}">
 					{{nav.left.branch.branch_name?nav.left.branch.branch_name:''}}
 				</a>
 			</div>
@@ -21,7 +21,7 @@
 
 				<ul class="nav navbar-nav">
 					<template v-for="x in nav.left.links">
-						<li class=""><a href="x.href">{{x.name}}</a></li>
+						<li class=""><a v-link="{path:x.href}">{{x.name}}</a></li>
 					</template>
 				</ul>
 
@@ -34,7 +34,7 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<template v-for="x in nav.right.links">
-						<li><a href="x.href">{{x.name}}</a></li>
+						<li><a :href="x.href">{{x.name}}</a></li>
 					</template>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">

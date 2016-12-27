@@ -4,30 +4,25 @@
 <template>
 	<div>
 		<Logo></Logo>
-		<Detail ></Detail>
+		<Book></Book>
 		<Foot></Foot>
 	</div>
 </template>
 <script>
-	import Detail from "../components/Detail"
-	import Logo from "../components/Logo"
-	import Foot from "../components/Foot"
+	import Foot from '../components/Foot'
+	import Book from '../components/Book'
+	import Logo from '../components/Logo'
+
 	export default{
 		data(){
 			return {
-				list:{}
+
 			}
 		},
-		ready(){
-		
-		},
 		components:{
-			Detail:Detail,
-			Logo:Logo,
-			Foot:Foot
-		},
-		methods:{
-
+			Foot:Foot,
+			Book:Book,
+			Logo:Logo
 		}
 	}
 </script>
