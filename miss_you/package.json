@@ -7,7 +7,11 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
     "jquery": "^3.1.1",
     "markdown": "^0.5.0",
     "mongodb": "^2.2.16",
