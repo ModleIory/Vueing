@@ -28,15 +28,21 @@
 		},
 		methods:{
 			get_list(){
-				this.$http.get('/src/config/list.json',{
+				this.$http({
+					url:'http://localhost:622/get_list',
+					method:'get',
+					emulateJSON:true,
+					credientials:true,
 					params:{
 
 					},
-					methods:'get',
-					timeout:30
+					body:{},
+					timeout:1*1000*60
 				}).then((res)=>{
-					//console.log(res.data)
-					this.list = res.data
+					console.log(res.data.data)
+					this.list = res.data.data
+				},(res)=>{
+					console.error(res)
 				})
 			}
 		}

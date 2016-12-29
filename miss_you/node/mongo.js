@@ -6,7 +6,7 @@ const util = require('util')
 
 const PORT = 27017
 const HOST = 'localhost'
-const DB = 'test'
+const DB = 'blog'
 const url = `mongodb://${HOST}:${PORT}/${DB}`
 
 /*insert One or insert Many  decide by obj.data is arrat or not

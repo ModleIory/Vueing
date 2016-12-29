@@ -4,7 +4,7 @@
 <template>
 	<div>
 		<Logo></Logo>
-		<Essay ></Essay>
+		<Essay @write_essay="deal_write"></Essay>
 		<Foot></Foot>
 	</div>
 </template>
@@ -27,7 +27,25 @@
 			Foot:Foot
 		},
 		methods:{
+			deal_write(data){
+				console.info(data)
+				this.$http({
+					method:'post',
+					url:'http://localhost:622/write_essay',
+					emulateJSON:true,
+					credientials:true,
+					timeout:1000*1*60,
+					params:{
 
+					},
+					body:data
+				}).then((res)=>{
+					console.log(res.data)
+					alert(res.data.msg)
+				},(res)=>{
+					console.error(res)
+				})
+			}
 		}
 	}
 </script>
