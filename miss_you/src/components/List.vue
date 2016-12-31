@@ -30,7 +30,7 @@
 				<strong style='float:right'>{{x.time}}</strong>
 			</div>
 			<div class="panel-body">
-				{{x.statement}}
+				{{x.keyword}}
 				<span 
 					class="label modle_label" 
 					:class="{'label-success':x.status=='special'?true:false,'label-warning':x.status=='special'?false:true}" >

@@ -64,7 +64,7 @@
 		methods:{
 			write(){
 				const write_data = {
-					time:Date.now(),
+					time:this.getTime(),
 					author:"modle",
 					title:this.title,
 					keyword:this.keyword,
@@ -73,6 +73,15 @@
 				}
 				console.warn(write_data)
 				this.$emit('write_essay',write_data)
+			},
+			getTime(){
+				const cur = new Date()
+				const year = cur.getFullYear()
+				const month = cur.getMonth()
+				const day = cur.getDate()
+				const hour = cur.getHours()
+				const minute  = cur.getMinutes()
+				return `${year}-${month+1}-${day} ${hour}:${minute}`
 			},
 			update(){
 

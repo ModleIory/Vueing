@@ -42,6 +42,7 @@
 				}).then((res)=>{
 					console.log(res.data)
 					alert(res.data.msg)
+					// this.$route.router.go({name:''})
 				},(res)=>{
 					console.error(res)
 				})
