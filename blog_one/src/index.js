@@ -21,7 +21,7 @@ router.map({
 		name:'operation',
 		component:Header
 	},
-	/*这种方式的子组件这么写,连路由命名都不用么?*/
+	/*这种方式的子组件这么写,连路由命名都不用么,就是Header下面的那个<router-view>,直接这里这么搞?*/
 	'/operation/select':{
 		name:'select',
 		component:Select

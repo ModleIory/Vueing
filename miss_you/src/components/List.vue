@@ -23,9 +23,9 @@
 		<div 
 			class="panel panel-default panel_modle" 
 			v-for="x in listData" 
-			@click="toDetail(x._id)"
+			@click="toDetail(x.id)"
 		>
-			<div class="panel-heading" :data-id="x._id">
+			<div class="panel-heading" :data-id="x.id">
 				<strong>{{x.title}}<strong>
 				<strong style='float:right'>{{x.time}}</strong>
 			</div>

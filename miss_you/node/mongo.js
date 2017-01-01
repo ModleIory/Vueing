@@ -29,6 +29,8 @@ const insert = (obj)=>{
 						console.log(e)
 						n(false)
 					}
+					console.log('插入后返回的数据...')
+					console.log(true)
 					y(true)
 					db.close()
 				})
@@ -41,7 +43,9 @@ const insert = (obj)=>{
 						console.log(e)
 						n(false)
 					}
-					y(true)
+					console.log('插入后返回的数据...,要返回insertid')
+					console.log(result.ops[0]['id'])
+					y(result.ops[0]['id'])
 					db.close()
 				})
 			}
@@ -64,7 +68,9 @@ const find = (obj)=>{
 			const col = db.collection(obj.col)
 			//多查询还是单查询
 			const flag = obj.single || false
+			console.log(obj)
 			if(obj.single){
+				console.log('single check')
 				col.findOne(obj.query,obj.options,(err,doc)=>{
 					try{
 						assert.ifError(err)
@@ -76,6 +82,7 @@ const find = (obj)=>{
 					y(doc)
 				})
 			}else{
+				console.log('multiple check')
 				col.find(obj.query,obj.options).toArray((err,doc)=>{
 					try{
 						assert.ifError(err)
@@ -117,7 +124,7 @@ const findAndModify = (obj)=>{
 					n(false)
 				}
 				console.log(docs)
-				y(docs)
+				y(docs.value.essay_max_id)
 			})
 			db.close()
 		})

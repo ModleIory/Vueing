@@ -42,7 +42,12 @@
 				}).then((res)=>{
 					console.log(res.data)
 					alert(res.data.msg)
-					// this.$route.router.go({name:''})
+					this.$route.router.go({
+						name:'detail',
+						params:{
+							id:res.data.insert_id
+						}
+					})
 				},(res)=>{
 					console.error(res)
 				})
