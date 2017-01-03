@@ -4,7 +4,12 @@
 <template>
 	<div>
 		<Logo></Logo>
-		<Book :detail-data="detail_data"></Book>
+		<Book 
+			:detail-data="detail_data" 
+			@do_delete="deal_delete" 
+			@do_update='deal_update'
+		>
+		</Book>
 		<Foot></Foot>
 	</div>
 </template>
@@ -43,6 +48,12 @@
 				},(err)=>{
 					console.log(err)
 				})
+			},
+			deal_delete(id){
+				alert('haha'+id.id)
+			},
+			deal_update(id){
+				alert('haha'+id.id)
 			}
 		},
 		components:{

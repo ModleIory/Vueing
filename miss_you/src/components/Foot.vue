@@ -2,7 +2,7 @@
 	footer{
 		width:100%;
 		height: 150px;
-		background: ##b1b1b1;
+		background: #b1b1b1;
 		color:black;
 		opacity: 0.4;
 	}

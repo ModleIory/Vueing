@@ -152,3 +152,49 @@ const findAndModify = (obj)=>{
 
 exports.findAndModify = findAndModify
 
+
+/*for delete of mongodb
+*::::只能单独删除id的键位
+*@params:obj.filter=>the delete condition
+*@params:obj.col =>the collection of mongodb String''
+*@params:obj.single =>single wheather delete just one? true just delete one ; default is true
+*/
+const deleteOneById = (obj)=>{
+	const p = new Promise((y,n)=>{
+		mc.connect(url,(err,db)=>{
+			const col = db.collection(obj.col)
+			let methods = ''
+			const single = obj.single||true
+			methods = single?'col.deleteOne':'col.deleteMany'
+			const filter = obj.filter
+			const callback = function(err,result){
+				try{
+					assert.ifError(err)
+				}catch(err){
+					console.log('删除失败,错误信息:')
+					console.log(err)
+					n(false)
+				}
+				console.log(result)
+				y(result)
+				db.close()
+			}
+			console.log(`${methods}(id:${filter.id},${callback})`)
+			//这个地方很奇怪,不能写对象进去如:
+			// eval(`${methods}({${filter}},${callback})`)
+			//也不能写转化成字符串的对象进去如
+			// eval(`${methods}({${JSON.stringify(filter)}},${callback})`)
+			//只能如下[由于这里的限制,暂时只能够删除一个,因为filter的key被限制了]
+			eval(`${methods}({id:${filter.id}},${callback})`)
+		})
+	})
+	return p
+}
+deleteOneById({
+	filter:{
+		id:3
+	},
+	col:'essay'
+})
+exports.deal_ddeleteOneByIdelete = deleteOneById
+
