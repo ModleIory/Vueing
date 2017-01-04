@@ -102,6 +102,7 @@
 			delete_essay(id){
 				console.log(id)
 				//$emit只能是个对象我擦,不然触发不了!
+				//还有,取名字,我取名doDelete居然没办法触发fuck
 				this.$emit('do_delete',{id:id})
 			},
 			update_essay(id){
