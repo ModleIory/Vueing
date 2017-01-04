@@ -70,8 +70,8 @@
 					fontSize:"16px",
 					lineHeight:"32px"
 				},
-				font_style:'',
-				font_color:'',
+				font_style:'微软雅黑',
+				font_color:'#efefef',
 				font_size:16,
 				line_height:32
 			}

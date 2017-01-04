@@ -16,21 +16,33 @@
 		<h2>{{operation}} your Article</h2>
 		<form role="form">
 			<div class="form-group">
-				<label for="essay_type">Specail</label>
+				<label for="essay_type">Special</label>
 				<input type="checkbox" id="checkbox" v-model="type">
 			</div>
 			<div class="form-group">
 				<label for="essay_title">Essay Title</label>
-				<input type="text" class="form-control" id="essay_title" placeholder="Please input you essay title" v-model="title">
+				<input type="text" 
+					class="form-control" 
+					id="essay_title" 
+					placeholder="Please input you essay title" 
+					v-model="title" 
+					:value="updateData.title?updateData.title:''"
+				>
 			</div>
 			<div class="form-group">
 				<label for="essay_keywords">Essay Keywords</label>
-				<input type="text" class="form-control" id="essay_keywords" placeholder="Please input you essay Keywords" v-model="keyword">
+				<input type="text" 
+					class="form-control" 
+					id="essay_keywords" 
+					placeholder="Please input you essay Keywords" 
+					v-model="keyword"
+					:value="updateData.keyword?updateData.keyword:''"
+				>
 			</div>
 		</form>
 		<textarea id="markdown"></textarea>
 		<p style="text-align: center;">
-			<button class="btn btn-lg btn-success" type="button" @click="write">{{operation}}</button>
+			<button class="btn btn-lg btn-success" type="button" @click="write(operation)">{{operation}}</button>
 			<button class="btn btn-lg btn-danger" type="button">abort</button>
 		</p>
 	</div>
@@ -48,6 +60,7 @@
 				content:''
 			}
 		},
+		props:['updateData'],
 		ready(){
 			// console.warn('ready')
 			this.init_editor()
@@ -57,12 +70,25 @@
 			// console.log('compiled')
 		},
 		computed:{
+		/*里面可以用this.props*/
 			operation(){
 				return this.$route.name
+			},
+			type(){
+				try{
+					/*点击simplemde会一直输出这个但是并没有变化啊*/
+					console.log(this.simplemde)
+					/*这个回填之后有问题,不可编辑了,变成了span块儿*/
+					this.simplemde.value(this.updateData.origin_content)
+				}catch(e){
+					console.log(e)
+				}
+				return this.updateData.status=='special'?true:false
 			}
 		},
 		methods:{
-			write(){
+		/*里面可以用this.props*/
+			write(operation){
 				const write_data = {
 					time:this.getTime(),
 					author:"modle",
@@ -71,8 +97,12 @@
 					status:this.type?'special':'normal',
 					content:this.simplemde.value()
 				}
-				console.warn(write_data)
-				this.$emit('write_essay',write_data)
+				if(operation=='write'){
+					console.warn(write_data)
+					this.$emit('write_essay',write_data)
+				}else{
+					alert('will update')
+				}
 			},
 			getTime(){
 				const cur = new Date()
@@ -111,9 +141,7 @@
 				// console.warn(this.simplemde.value())
 				const router = this.$route
 				if(router.params.id){
-					
-				}else{
-					
+
 				}
 				
 			}

@@ -50,10 +50,42 @@
 				})
 			},
 			deal_delete(id){
-				alert('haha'+id.id)
+				// alert('haha'+id.id)
+				this.$http({
+					url:'http://localhost:622/delete_essay',
+					method:'delete',
+					params:{
+
+					},
+					body:{
+						id:id.id
+					},
+					credientials:true,
+					timeout:1000*60,
+					amulateJSON:true
+				}).then((res)=>{
+					console.info(res.data)
+					if(res.data.code==1){
+						alert(res.data.msg)
+						this.$route.router.go({
+							name:"home",
+							params:{
+
+							}
+						})
+					}
+				}).catch((err)=>{
+					console.log('document 69 in Detail')
+				})
 			},
 			deal_update(id){
-				alert('haha'+id.id)
+				// alert('haha'+id.id)
+				this.$route.router.go({
+					name:'update',
+					params:{
+						id:id.id
+					}
+				})
 			}
 		},
 		components:{

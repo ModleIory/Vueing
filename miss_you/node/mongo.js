@@ -179,7 +179,7 @@ const deleteOneById = (obj)=>{
 				y(result)
 				db.close()
 			}
-			console.log(`${methods}(id:${filter.id},${callback})`)
+			// console.log(`${methods}(id:${filter.id},${callback})`)
 			//这个地方很奇怪,不能写对象进去如:
 			// eval(`${methods}({${filter}},${callback})`)
 			//也不能写转化成字符串的对象进去如
@@ -190,11 +190,11 @@ const deleteOneById = (obj)=>{
 	})
 	return p
 }
-deleteOneById({
-	filter:{
-		id:3
-	},
-	col:'essay'
-})
-exports.deal_ddeleteOneByIdelete = deleteOneById
+// deleteOneById({
+// 	filter:{
+// 		id:3
+// 	},
+// 	col:'essay'
+// })
+exports.deleteOneById = deleteOneById
 

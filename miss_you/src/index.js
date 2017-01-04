@@ -22,7 +22,7 @@ router.map({
 		name:'home',
 		component:Home
 	},
-	'/update':{
+	'/update/:id':{
 		name:'update',
 		component:Write
 	},

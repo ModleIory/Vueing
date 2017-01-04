@@ -4,7 +4,7 @@
 <template>
 	<div>
 		<Logo></Logo>
-		<Essay @write_essay="deal_write"></Essay>
+		<Essay @write_essay="deal_write" :update-data="updateData"></Essay>
 		<Foot></Foot>
 	</div>
 </template>
@@ -15,11 +15,11 @@
 	export default{
 		data(){
 			return {
-				list:{}
+				updateData:{}
 			}
 		},
 		ready(){
-		
+			this.init_type()
 		},
 		components:{
 			Essay:Essay,
@@ -27,6 +27,30 @@
 			Foot:Foot
 		},
 		methods:{
+			//Judge update orsave
+			init_type(){
+				const id = this.$route.params.id
+				if(id){
+					this.$http({
+						url:'http://localhost:622/get_detail',
+						method:'get',
+						params:{
+							id:id
+						},
+						body:{
+
+						},
+						emulateJSON:true,
+						timeout:1000*60,
+						credientials:true
+					}).then((res)=>{	
+						console.log(res.data.msg)
+						this.updateData = res.data.msg
+					}).catch((err)=>{
+						console.error(err)
+					})
+				}
+			},
 			deal_write(data){
 				console.info(data)
 				this.$http({

@@ -7,6 +7,7 @@ router.reflect = (app)=>{
 	app.post('/write_essay',main.write_essay)
 	app.get('/get_list',main.get_list)
 	app.get('/get_detail',main.get_detail)
+	app.delete('/delete_essay',main.delete_essay)
 }
 
 module.exports = router

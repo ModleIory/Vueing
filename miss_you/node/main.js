@@ -4,7 +4,7 @@ module.exports = {
 	http_deal(req,res,next){
 		res.set({
 			"builder-msg":"modlefairy",
-			"Access-Control-Allow-Methods":"POST,GET",
+			"Access-Control-Allow-Methods":"POST,GET,DELETE,PUT",
 			"Access-Control-Max-Age":"3600",
 			"Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept, client_id, uuid, Authorization",
 			"Access-Control-Allow-Origin":"*",
@@ -67,6 +67,7 @@ module.exports = {
 		}).then((docs)=>{
 			console.log('已经查到信息,细节是:')
 			const md = markdown.markdown
+			docs.origin_content = docs.content
 			docs.content = md.toHTML(docs.content)
 			console.log(docs)
 			res.send({code:1,msg:docs})
@@ -74,5 +75,23 @@ module.exports = {
 		catch((msg)=>{
 			res.send({code:0,msg:"报错啦!"})
 		})
+	},
+	delete_essay(req,res){
+		/*delete 方法发送的数据也是夹带在body里面的*/
+		const data = req.body
+		// console.log(`delete 传过来的数据是: `)
+		// console.log(data)
+		mongo.deleteOneById({
+			filter:data,
+			col:'essay'
+		}).then((result)=>{
+			console.log(result.result)
+			if(result.result.ok==1){
+				res.send({code:1,msg:'删除成功!'})
+			}
+		}).catch((err)=>{
+			res.send({code:0,msg:'删除失败!'})
+		})
+		
 	}
 }
