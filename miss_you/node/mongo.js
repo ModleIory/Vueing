@@ -171,7 +171,7 @@ const deleteOneById = (obj)=>{
 				try{
 					assert.ifError(err)
 				}catch(err){
-					console.log('删除失败,错误信息:')
+					console.log('删除失败,错误信息: mongo.js line 174')
 					console.log(err)
 					n(false)
 				}
@@ -197,4 +197,86 @@ const deleteOneById = (obj)=>{
 // 	col:'essay'
 // })
 exports.deleteOneById = deleteOneById
+
+
+/*for udpateOne of mongodb
+*@params:obj.filter=>the update condition
+*@params:obj.col =>the collection of mongodb String''
+*@params:obj.change=>the new data {}
+*@params:obj.options=>the choice like {upsert:true,w:1}
+*/
+const updateOne = (obj)=>{
+	const p = new Promise((y,n)=>{
+		mc.connect(url,(err,db)=>{
+			const col = db.collection(obj.col)
+			col.updateOne(obj.filter,{$set:obj.change},obj.options,function(err,result){
+				try{
+					assert.ifError(err)
+				}catch(e){
+					console.log(e)
+					console.log('修改时候出错 mongo 217 line')
+					n(false)
+				}
+				console.log(result)
+				y(result.result)
+				db.close()
+			})
+		})
+	})
+	return p
+}
+
+// updateOne({
+// 	filter:{
+// 		id:12
+// 	},
+// 	change:{
+// 		author:'fairy'
+// 	},
+// 	options:{
+// 		upsert:true,
+// 		w:1
+// 	},
+// 	col:'essay'
+// })
+exports.updateOne = updateOne
+
+//set blog header and footer data
+// insert({
+// 	data:{
+// 		logo:{
+// 			"left":{
+// 				"branch":{
+// 					"branch_name":"Miss You",
+// 					"branch_link":"/"
+// 				},
+// 				"links":[
+// 					{"name":"Write","href":"/write"},
+// 					{"name":"Read","href":""}
+// 				]
+// 			},
+// 			"right":{
+// 				"links":[
+// 					{"name":"More","href":""}
+// 				],
+// 				"dropdown":{
+// 					"name":"Setttings",
+// 					"list":[
+// 						{"name":"Setting","href":""},
+// 						{"name":"Login","href":""},		
+// 						{"name":"Out","href":""}		
+// 					]
+// 				}
+// 			}
+// 		},
+// 		foot:{
+// 			"tel":"13168594567",
+// 			"addr":"yunnan province",
+// 			"email":"modle_sherlock@163.com",
+// 			"qq":"3223573855@qq.com",
+// 			"auth":"own to modlefairy company"
+// 		}
+// 	},
+// 	col:'setting'
+// })
 

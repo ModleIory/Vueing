@@ -8,6 +8,8 @@ router.reflect = (app)=>{
 	app.get('/get_list',main.get_list)
 	app.get('/get_detail',main.get_detail)
 	app.delete('/delete_essay',main.delete_essay)
+	app.put('/update_essay',main.update_essay)
+	app.get('/get_setting',main.get_setting)
 }
 
 module.exports = router

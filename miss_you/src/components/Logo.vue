@@ -75,28 +75,35 @@
 						"dropdown":{
 							"name":"",
 							"list":[
-								{"name":"","href":""}	
+								{"name":"","href":""},
+								{"name":"","href":""},		
+								{"name":"","href":""}		
 							]
 						}
 					}
 				},
-				get_nav_link:'/src/config/logo.json',
+				get_nav_link:'http://localhost:622/get_setting?position=header',
 				active:true
 			}
 		},
-		created(){
+		ready(){
 			this.getNav()
 		},
 		methods:{
 			getNav(){
-				this.$http.get(this.get_nav_link,{
-					params:{
-
-					},
-					timeout:20
+				this.$http({
+					url:this.get_nav_link,
+					method:'get',
+					params:{},
+					body:{},
+					timeout:1000*6,
+					emulateJSON:true,
+					credientials:true
 				}).then((res)=>{
-					//console.log(res.data)
-					this.nav = res.data
+					// console.log(res.data)
+					this.nav = res.data.msg
+				},(err)=>{
+					console.log(err)
 				})
 			}
 		}

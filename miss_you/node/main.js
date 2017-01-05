@@ -93,5 +93,54 @@ module.exports = {
 			res.send({code:0,msg:'删除失败!'})
 		})
 		
+	},
+	update_essay(req,res){
+		const data = req.body
+		console.log(data)
+		mongo.updateOne({
+			filter:{
+				id:parseInt(data.id)
+			},
+			col:'essay',
+			change:{
+				title:data.title,
+				content:data.content,
+				keyword:data.keyword,
+				status:data.status,
+				author:data.author,
+				time:data.time
+			},
+			options:{
+				upsert:true,
+				w:1
+			}
+		}).then((docs)=>{
+			res.send({code:1,msg:"更新成功哇!"})
+		}).catch((err)=>{
+			res.send({code:0,msg:"更新失败哇!"})
+		})
+	},
+	get_setting(req,res){
+		const position = req.query.position
+		mongo.find({
+			query:{},
+			col:'setting',
+			options:{},
+			single:true
+		}).then((msg)=>{
+			console.log("**********************")
+			console.log(msg)
+			let back_data
+			if(position=='header'){
+				back_data = msg.logo
+			}
+			if(position=='foot'){
+				back_data = msg.foot
+			}
+			res.send({code:1,msg:back_data})
+		}).catch((err)=>{
+			console.log(err)
+			res.send({code:0,msg:"查询菜单失败!"})
+		})
 	}
 }

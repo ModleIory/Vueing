@@ -4,7 +4,7 @@
 <template>
 	<div>
 		<Logo></Logo>
-		<Essay @write_essay="deal_write" :update-data="updateData"></Essay>
+		<Essay @write_essay="deal_write" :update-data="updateData" @update_essay="deal_update"></Essay>
 		<Foot></Foot>
 	</div>
 </template>
@@ -44,7 +44,7 @@
 						timeout:1000*60,
 						credientials:true
 					}).then((res)=>{	
-						console.log(res.data.msg)
+						//console.log(res.data.msg)
 						this.updateData = res.data.msg
 					}).catch((err)=>{
 						console.error(err)
@@ -64,7 +64,7 @@
 					},
 					body:data
 				}).then((res)=>{
-					console.log(res.data)
+					//console.log(res.data)
 					alert(res.data.msg)
 					this.$route.router.go({
 						name:'detail',
@@ -74,6 +74,31 @@
 					})
 				},(res)=>{
 					console.error(res)
+				})
+			},
+			deal_update(data){
+				console.info(data)
+				this.$http({
+					url:"http://localhost:622/update_essay",
+					method:'put',
+					params:{},
+					body:data,
+					credientials:true,
+					timeout:1000*60,
+					emulateJSON:true
+				}).then((res)=>{
+					//console.info(res.data)
+					if(res.data.code==1){
+						alert(res.data.msg)
+						this.$route.router.go({
+							name:'detail',
+							params:{
+								id:data.id
+							}
+						})
+					}
+				},(err)=>{
+					console.warn(err)
 				})
 			}
 		}

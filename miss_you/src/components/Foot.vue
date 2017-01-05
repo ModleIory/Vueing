@@ -39,7 +39,8 @@
 					"email":"",
 					"qq":"",
 					"auth":""
-				}
+				},
+				get_footer_link:"http://localhost:622/get_setting?position=foot"
 			}
 		},
 		ready(){
@@ -47,14 +48,19 @@
 		},
 		methods:{
 			get_footer(){
-				this.$http.get('/src/config/foot.json',{
-					params:{
-
-					},
-					timeout:20
+				this.$http({
+					url:this.get_footer_link,
+					method:'get',
+					params:{},
+					body:{},
+					timeout:1000*6,
+					emulateJSON:true,
+					credientials:true
 				}).then((res)=>{
-					//console.info(res.data)
-					this.foot = res.data
+					// console.log(res.data)
+					this.foot = res.data.msg
+				},(err)=>{
+					console.log(err)
 				})
 			}
 		}

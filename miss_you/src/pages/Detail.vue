@@ -42,7 +42,7 @@
 					url:"http://localhost:622/get_detail",
 					timeout:1*1000*60
 				}).then((res)=>{
-					console.log(res.data)
+					//console.log(res.data)
 					this.detail_data=res.data.msg
 
 				},(err)=>{
@@ -64,7 +64,7 @@
 					timeout:1000*60,
 					amulateJSON:true
 				}).then((res)=>{
-					console.info(res.data)
+					//console.info(res.data)
 					if(res.data.code==1){
 						alert(res.data.msg)
 						this.$route.router.go({

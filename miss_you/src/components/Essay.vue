@@ -17,7 +17,7 @@
 		<form role="form">
 			<div class="form-group">
 				<label for="essay_type">Special</label>
-				<input type="checkbox" id="checkbox" v-model="type">
+				<input type="checkbox" id="checkbox" v-model="type"  @click='setStatus'>
 			</div>
 			<div class="form-group">
 				<label for="essay_title">Essay Title</label>
@@ -43,7 +43,7 @@
 		<textarea id="markdown"></textarea>
 		<p style="text-align: center;">
 			<button class="btn btn-lg btn-success" type="button" @click="write(operation)">{{operation}}</button>
-			<button class="btn btn-lg btn-danger" type="button">abort</button>
+			<button class="btn btn-lg btn-danger" type="button" @click="abort">abort</button>
 		</p>
 	</div>
 </template>
@@ -74,34 +74,62 @@
 			operation(){
 				return this.$route.name
 			},
+			/*data随着props改变==>不可,这样type这个值就不会变了,死都是this.props.type*/
+			/*computed里面的东西仅仅只关联return的东西,要更新她,更新return而非type,无法*/
 			type(){
-				try{
-					/*点击simplemde会一直输出这个但是并没有变化啊*/
-					console.log(this.simplemde)
-					/*这个回填之后有问题,不可编辑了,变成了span块儿*/
-					this.simplemde.value(this.updateData.origin_content)
-				}catch(e){
-					console.log(e)
+				if(this.$route.name == 'update'){
+					try{
+						/*点击simplemde会一直输出这个但是并没有变化啊*/
+						console.log(this.simplemde)
+						/*这个回填之后有问题,不可编辑了,变成了span块儿*/
+						this.simplemde.value(this.updateData.origin_content)
+					}catch(e){
+						console.log(e)
+					}
+					return this.updateData.status=='special'?true:false
 				}
-				return this.updateData.status=='special'?true:false
+				return ""
 			}
 		},
 		methods:{
+			abort(){
+				this.$route.router.go({
+					name:'detail',
+					params:{
+						id:this.updateData.id
+					}
+				})
+			},
+			/*点击选择框时候触发下*/
+			setStatus(){
+				this.updateData.status = this.updateData.status=='special'?'normal':'special'
+			},
 		/*里面可以用this.props*/
 			write(operation){
-				const write_data = {
-					time:this.getTime(),
-					author:"modle",
-					title:this.title,
-					keyword:this.keyword,
-					status:this.type?'special':'normal',
-					content:this.simplemde.value()
-				}
 				if(operation=='write'){
-					console.warn(write_data)
+					const write_data = {
+						time:this.getTime(),
+						author:"modle",
+						title:this.title,
+						keyword:this.keyword,
+						status:this.type?'special':'normal',
+						content:this.simplemde.value()
+					}
+					//console.warn(write_data)
 					this.$emit('write_essay',write_data)
 				}else{
-					alert('will update')
+					const update_data = {
+						time:this.getTime(),
+						author:'modle',
+						title:this.title,
+						keyword:this.keyword,
+						status:this.type?'special':'normal',
+						/*这个我暂时没有办法修改*/
+						content:this.updateData.origin_content,
+						id:this.updateData.id
+					}
+					//console.warn(update_data)
+					this.$emit('update_essay',update_data)
 				}
 			},
 			getTime(){
@@ -112,9 +140,6 @@
 				const hour = cur.getHours()
 				const minute  = cur.getMinutes()
 				return `${year}-${month+1}-${day} ${hour}:${minute}`
-			},
-			update(){
-
 			},
 			init_editor(){
 				/*从index进来,资源加载好了,可以有,但是直接进这个,资源没有加载好,不可以有!*/

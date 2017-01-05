@@ -34,7 +34,7 @@
 			<strong>{{detailData.time}}</strong>
 			<strong style="margin-left:20px">{{detailData.author}}</strong>
 			<br>
-			<h5>{{detailData.keyword}}<span class="label label-success">{{detailData.status}}</span></h5>
+			<h5>{{detailData.keyword}} &emsp;&emsp;<span class="label label-success">{{detailData.status}}</span></h5>
 		</div>
 		<p>
 			<strong>font-style</strong>
@@ -55,8 +55,8 @@
 		{{{detailData.content}}}
 		</p>
 		<p style="text-align: center">
-			<button type="button" class="btn btn-lg btn-success" @click="update_essay(detailData.id)">修改</button>
-			<button type="button" class="btn btn-lg btn-danger" @click="delete_essay(detailData.id)" >删除</button>
+			<button type="button" class="btn btn-lg btn-success" @click="update_essay(detailData.id)">update</button>
+			<button type="button" class="btn btn-lg btn-danger" @click="delete_essay(detailData.id)" >delete</button>
 		</p>
 	</div>
 </template>
@@ -100,7 +100,7 @@
 				}
 			},
 			delete_essay(id){
-				console.log(id)
+				//console.log(id)
 				//$emit只能是个对象我擦,不然触发不了!
 				//还有,取名字,我取名doDelete居然没办法触发fuck
 				this.$emit('do_delete',{id:id})
