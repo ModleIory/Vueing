@@ -1,5 +1,5 @@
 {
-  "name": "miss_you",
+  "name": "miss_you_blog",
   "description": "Her and my improvement",
   "author": "",
   "scripts": {
@@ -18,10 +18,11 @@
     "simplemde": "^1.11.2",
     "vue": "^1.0.0",
     "vue-resource": "^1.0.3",
-    "vue-router": "^0.7.13"
+    "vue-router": "^0.7.13",
+    "vuex": "^2.1.1"
   },
   "devDependencies": {
-    "autoprefixer-loader": "^3.2.0",
+    "postcss-loader": "^3.2.0",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.0.0",
     "babel-plugin-transform-runtime": "^6.0.0",

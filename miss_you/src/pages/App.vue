@@ -8,12 +8,8 @@
 	</div>
 </template>
 <script>
-	import Logo from '../components/Logo'
+	import store from '../store'
 	export default{
-		data(){
-			return {
-
-			}
-		}
+		store
 	}
 </script>

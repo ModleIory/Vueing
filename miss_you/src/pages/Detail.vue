@@ -17,11 +17,14 @@
 	import Foot from '../components/Foot'
 	import Book from '../components/Book'
 	import Logo from '../components/Logo'
+	import * as actions from '../store/types-action'
 
 	export default{
 		data(){
 			return {
-				detail_data:{}
+				detail_data:{},
+				url:"http://localhost:622/get_detail",
+				delete_url:'http://localhost:622/delete_essay'
 			}
 		},
 		ready(){
@@ -29,53 +32,29 @@
 		},
 		methods:{
 			getDetailData(){
-				const essay_id = this.$route.params.id
-				// alert(essay_id)
-				this.$http({
-					method:'get',
-					params:{
-						id:essay_id
-					},
-					body:{},
-					emulateJSON:true,
-					credientials:true,
-					url:"http://localhost:622/get_detail",
-					timeout:1*1000*60
-				}).then((res)=>{
-					//console.log(res.data)
-					this.detail_data=res.data.msg
-
-				},(err)=>{
-					console.log(err)
+				this.$store.dispatch({
+					type:actions.get_detail,
+					essay_id:this.$route.params.id,
+					url:this.url
+				})
+				.then(()=>{
+					this.detail_data = this.$store.state.detail_data
 				})
 			},
 			deal_delete(id){
 				// alert('haha'+id.id)
-				this.$http({
-					url:'http://localhost:622/delete_essay',
-					method:'delete',
-					params:{
+				this.$store.dispatch({
+					type:actions.delete_essay,
+					url:this.delete_url,
+					id:id.id
+				}).then((msg)=>{
+					alert('已经删除了!')
+					this.$route.router.go({
+						name:"home",
+						params:{
 
-					},
-					body:{
-						id:id.id
-					},
-					credientials:true,
-					timeout:1000*60,
-					amulateJSON:true
-				}).then((res)=>{
-					//console.info(res.data)
-					if(res.data.code==1){
-						alert(res.data.msg)
-						this.$route.router.go({
-							name:"home",
-							params:{
-
-							}
-						})
-					}
-				}).catch((err)=>{
-					console.log('document 69 in Detail')
+						}
+					})
 				})
 			},
 			deal_update(id){

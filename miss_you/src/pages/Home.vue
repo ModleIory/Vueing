@@ -12,10 +12,12 @@
 	import List from "../components/List"
 	import Logo from "../components/Logo"
 	import Foot from "../components/Foot"
+	import * as actions from '../store/types-action'
 	export default{
 		data(){
 			return {
-				list:{}
+				list:{},
+				url:'http://localhost:622/get_list'
 			}
 		},
 		ready(){
@@ -28,21 +30,11 @@
 		},
 		methods:{
 			get_list(){
-				this.$http({
-					url:'http://localhost:622/get_list',
-					method:'get',
-					emulateJSON:true,
-					credientials:true,
-					params:{
-
-					},
-					body:{},
-					timeout:1*1000*60
-				}).then((res)=>{
-					//console.log(res.data.data)
-					this.list = res.data.data
-				},(res)=>{
-					console.error(res)
+				this.$store.dispatch({
+					type:actions.get_list,
+					url:this.url
+				}).then(()=>{
+					this.list = this.$store.state.list
 				})
 			}
 		}

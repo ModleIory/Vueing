@@ -12,10 +12,14 @@
 	import Essay from "../components/Essay"
 	import Logo from "../components/Logo"
 	import Foot from "../components/Foot"
+	import {mapState} from 'vuex'
+	import * as actions from '../store/types-action'
 	export default{
 		data(){
 			return {
-				updateData:{}
+				updateData:{},
+				write_url:'http://localhost:622/write_essay',
+				update_url:"http://localhost:622/update_essay"
 			}
 		},
 		ready(){
@@ -26,79 +30,47 @@
 			Logo:Logo,
 			Foot:Foot
 		},
+		computed:{
+			
+		},
 		methods:{
 			//Judge update orsave
 			init_type(){
 				const id = this.$route.params.id
 				if(id){
-					this.$http({
-						url:'http://localhost:622/get_detail',
-						method:'get',
-						params:{
-							id:id
-						},
-						body:{
-
-						},
-						emulateJSON:true,
-						timeout:1000*60,
-						credientials:true
-					}).then((res)=>{	
-						//console.log(res.data.msg)
-						this.updateData = res.data.msg
-					}).catch((err)=>{
-						console.error(err)
-					})
+					this.updateData = this.$store.state.detail_data
 				}
 			},
 			deal_write(data){
 				console.info(data)
-				this.$http({
-					method:'post',
-					url:'http://localhost:622/write_essay',
-					emulateJSON:true,
-					credientials:true,
-					timeout:1000*1*60,
-					params:{
-
-					},
-					body:data
-				}).then((res)=>{
-					//console.log(res.data)
-					alert(res.data.msg)
+				this.$store.dispatch({
+					type:actions.write_essay,
+					url:this.write_url,
+					data:data
+				})
+				.then((msg)=>{
+					alert(msg.msg)
 					this.$route.router.go({
 						name:'detail',
 						params:{
-							id:res.data.insert_id
+							id:msg.insert_id
 						}
 					})
-				},(res)=>{
-					console.error(res)
 				})
 			},
 			deal_update(data){
 				console.info(data)
-				this.$http({
-					url:"http://localhost:622/update_essay",
-					method:'put',
-					params:{},
-					body:data,
-					credientials:true,
-					timeout:1000*60,
-					emulateJSON:true
+				this.$store.dispatch({
+					type:actions.update_essay,
+					data:data,
+					url:this.update_url
 				}).then((res)=>{
-					//console.info(res.data)
-					if(res.data.code==1){
-						alert(res.data.msg)
-						this.$route.router.go({
-							name:'detail',
-							params:{
-								id:data.id
-							}
-						})
-					}
-				},(err)=>{
-					console.warn(err)
+					this.$route.router.go({
+						name:'detail',
+						params:{
+							id:data.id
+						}
+					})
 				})
 			}
 		}
