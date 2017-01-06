@@ -24,3 +24,16 @@
 
 ## github 地址  
 [modleiory](https://github.com/ModleIory/Vueing)
+
+> `markdown测试哈玩玩顺便`  
+
+```
+    console.log('this is me')
+        alert("fuck")
+```
+* one
+    * one__
+    * two__
+* two
+    * two__
+    * three
