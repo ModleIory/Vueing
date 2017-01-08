@@ -3,7 +3,7 @@
   "description": "Her and my improvement",
   "author": "",
   "scripts": {
-    "test": "webpack-dev-server --inline --hot",
+    "test": "webpack-dev-server --inline --hot --color",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
