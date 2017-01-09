@@ -7,11 +7,17 @@
 # 本地测试运行方法  
 * **打开本地mongodb**  
 * **后台命令**  
-> `node app.js`  
+```
+node app.js
+```
 * **前台命令**  
-> `npm test`
+```
+npm test
+```
 * **运行**
-> `start http://localhost:9090`
+```
+start http://localhost:9090
+```
 
 # 结构说明
 1. **后台文件夹**  
@@ -25,15 +31,4 @@
 ## github 地址  
 [modleiory](https://github.com/ModleIory/Vueing)
 
-> `markdown测试哈玩玩顺便`  
 
-```
-    console.log('this is me')
-        alert("fuck")
-```
-* one
-    * one__
-    * two__
-* two
-    * two__
-    * three
